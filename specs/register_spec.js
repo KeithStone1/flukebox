@@ -22,7 +22,7 @@ describe('GET /admin', function(){
     
     var handler = app.getMap['/admin'];
     expect(handler).toBeDefined();
-    expect(handler).toEqual(admin.redirectToSignin);
+    expect(handler).toEqual(admin.index);
   });
 });
 
