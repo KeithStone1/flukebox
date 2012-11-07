@@ -3,11 +3,12 @@
  * Module dependencies.
  */
 
-var express  = require('express')
-  , register =  require('./register')
-  , http     = require('http')
-  , path     = require('path')
-  , cons     = require('consolidate');
+var express     = require('express')
+  , register    =  require('./register')
+  , http        = require('http')
+  , path        = require('path')
+  , cons        = require('consolidate')
+  , MemoryStore = express.session.MemoryStore;
 
 var app = express();
 
@@ -24,6 +25,8 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(express.errorHandler());
+  app.use(express.session({store: new MemoryStore()}));
+  app.use(express.cookieParser());
 });
 
 register.routesFor(app);
