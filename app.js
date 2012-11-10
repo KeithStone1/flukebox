@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -8,7 +7,8 @@ var express     = require('express')
   , http        = require('http')
   , path        = require('path')
   , cons        = require('consolidate')
-  , MemoryStore = express.session.MemoryStore;
+  , MemoryStore = express.session.MemoryStore
+  , dependencies = require('./dependencies');
 
 var app = express();
 
@@ -29,7 +29,7 @@ app.configure(function(){
   app.use(express.cookieParser());
 });
 
-register.routesFor(app);
+register.routesFor(app, dependencies);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

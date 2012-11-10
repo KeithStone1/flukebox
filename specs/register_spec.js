@@ -1,10 +1,20 @@
 var register = require('../register');
-var admin = require('../routes/admin')
+var Admin = require('../routes/admin').Admin;
 var App = require('./fakes/app').App;
 
 var app = new App();
 
-register.routesFor(app);
+var dependencies = {
+	admin : {
+      redirectToSignin : function() {},
+      signin : function() {},
+      index : function() {}
+	}
+};
+
+var admin = dependencies.admin
+
+register.routesFor(app, dependencies);
 
 
 

@@ -3,16 +3,26 @@
  * GET users listing.
  */
 
-exports.signin = function(req, res){
+exports.Admin = function(getAdminCredentials){
+	var self = this;
 	
-  res.render('dashboard', {email: req.body.email});
-};
-
-exports.redirectToSignin = function(req, res){
+  self.signin = function(req, res){
 	
-  res.redirect('/admin/signin');
-};
+    var credentialsFromUI = {email: req.body.email, password : req.body.password};
+    var realAdminCredentials = getAdminCredentials();
+  
+    if(credentialsFromUI.email == realAdminCredentials.email && credentialsFromUI.password == realAdminCredentials.password){
+  	
+  	  res.render('dashboard', {email: credentialsFromUI.email});
+  	}
+  }; 
+  
+  self.redirectToSignin = function(req, res){
+	
+    res.redirect('/admin/signin');
+  };
 
-exports.index = function(req, res){
-  res.render('index', { signinUrl: '/admin/signin' });
+  self.index = function(req, res){
+    res.render('index', { signinUrl: '/admin/signin' });
+  };
 };
