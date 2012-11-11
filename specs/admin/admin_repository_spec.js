@@ -1,5 +1,5 @@
 var adminRepository = require('../../admin/admin_repository.js');
-var expectedUser = require('../../admin/user.js').user;
+var expectedUser = require('../../admin/admin_credentials.js').credentials;
 
 
 describe('Admin Repository', function(){

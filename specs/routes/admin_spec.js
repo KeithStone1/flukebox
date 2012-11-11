@@ -38,6 +38,25 @@ describe("Signin", function(){
   	 expect(response.view).toEqual("dashboard");
   	 expect(response.model.email).toEqual("a@b.com");
   });	
+  
+  it("should not sign in and render the error view if email is incorrect", function(){
+  	 var request  = {body : {email: "a@b.com", password: "password"}} 
+  	 var response = new Response();
+  	 
+  	 var getAdminCredentialsWasCalled = false;
+  	 var getAdminCredentials = function () {
+  	 	getAdminCredentialsWasCalled = true;
+  	 	return {email:"b@c.com", password : "password"};
+  	 };
+  	 var admin = new Admin(getAdminCredentials);
+  	
+  	 admin.signin(request, response);
+  	 
+  	 expect(getAdminCredentialsWasCalled).toBeTruthy();
+  	 expect(response.isRendered).toBeTruthy();
+  	 expect(response.view).toEqual("signinerror");
+  	 expect(response.model.message).toEqual("The credentials you entered seem to be incorrect");
+  });
 	
 });
 

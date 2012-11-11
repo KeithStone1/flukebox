@@ -1,7 +1,7 @@
-var admin = require("./user.js");
+var admin = require("./admin_credentials");
 
 exports.getAdminCredentials = function() {
-	return admin.user;
+	return admin.credentials;
 }
 
 
